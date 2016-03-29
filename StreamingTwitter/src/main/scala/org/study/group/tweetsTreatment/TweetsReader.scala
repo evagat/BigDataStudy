@@ -43,10 +43,8 @@ object TweetsReader  {
 
     //Tweets extractions
     val tweet  = stream.map(rdd =>{
-       //Message
-       (rdd.getUser.getName, rdd.getText)
-    }
-    ).map(twt =>{
+      //Message
+      val twt = (rdd.getUser.getName, rdd.getText)
       //Send to Kafka
       KafkaProducer.produceIntoKafka(twt.toString,"tweets","localhost:9092")
     })
